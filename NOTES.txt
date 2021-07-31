@@ -63,3 +63,13 @@ WORKFLOW
   >> amplify add Storage
   >> content, auth&guest (guest read only), no lambda
   >> need to add img id to schema- update api
+
+RESOURCES
+
+https://www.youtube.com/watch?v=13nYLmjZ0Ys&ab_channel=NaderDabit
+
+https://docs.amplify.aws/cli
+
+https://tailwindcss.com/docs/guides/nextjs#setting-up-tailwind-css
+
+https://nextjs.org/docs/getting-started
