@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Goal
 
-## Getting Started
+This project was utilized as a preparation exercise for Project 3 and learning exercise for serverless application.
 
-First, run the development server:
+_NOTE: Homework 14 required creation of a similar blog posting app_
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Hosting/Deployment: AWS Amplify/Serverless
+- Auth: AWS Cognito
+- API: GraphQL
+- DB: DynamoDB
+- FrontEnd: Nextjs/TailwindCSS
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+_[Deployed app found here](https://d2hjrdqcx090np.cloudfront.net/)_
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+# Application
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+_NOTE: further detail of application found in NOTES.txt_
 
-## Learn More
+### Nextjs
 
-To learn more about Next.js, take a look at the following resources:
+The Nextjs framework was chosen to provide application of more advanced front-end concepts. Implemented concepts include hybrid build/request time page generation, page routing, route pre-fetching, incremental static hydration, and API integration.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Auth
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Amplify allows Cognito integration for user and page authentication/authorization. Cognito is also applied in the GraphQL methods for authorized data fetching.
 
-## Deploy on Vercel
+### API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+GraphQL is leveraged within the Amplify CLI to create a Post model. This method creates streamlined testing within the AppSync dashboard, and data relations within DynamoDB.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Hosting/Deployment
+
+With AWS becoming an industry staple, AWS Amplify was chosen to apply serverless architecture. Backend deployments were issued with Amplify CLI and app deployment was accomplished using serverless-next abstraction.
+
+## TODOs
+
+Lots of todos.
+
+- Add authorized commenting to posts
+- Image optimization and img preview on Home page
+- Styling
+- Cache control
+- Post filtering methods
+- Custom Domain
