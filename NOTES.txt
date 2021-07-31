@@ -1,0 +1,65 @@
+WORKFLOW
+
+> create next project
+> install deps
+> setup aws profile in vscode
+> create tailwind config, npx tailwindcss init -p
+> include tailwind base styles in ./styles/globals.css
+  >> in :root, target amplify componments with --amplify-
+> amplify init, update source dir path to . and dist to .next
+  >> creates amplify folder, deploys to cloud
+> amplify add api
+  >> GraphQL, API Key auth type, edit schema
+> save schema, run amplify push
+    >>> **future ref: amplify update api THEN edit schema THEN push**
+> on first push, let amplify generate GraphQL operations
+  >> root is not at src, update to ./graphql/**/*.js
+> once api is deployed, create some data, query from next-app
+  >> navigate to amplify/appync dahboard, or CLI amplify console api
+  >> create a graphql mutation for createPost, test with listPost query
+> create a configureAmplify.js, connect to aws-exports.js
+  >> use Amplify.configure(config)
+  >> import this anywhere to use connection in api routes
+  >> import "../configureAmplify" to initialize in _app.js
+> import API from aws-amplify and corresponding graphql query (listPosts)
+  >> make async function to fetch posts- await API.graphql()
+  >> map data to return
+> add authentication so user can update own posts
+  >> amplify add auth
+  >> deploy update with amplify push
+> make a route for profile in pages
+  >> import withAuthenticator and AmplifySignout from ui-react lib
+  >> use Auth.currentAuthenticatedUser() to get cognito user obj, if one
+  >> add in later functionality to update user info
+> after authentication confirmed working, add authorization to api routes 
+  >> amplify update api, update auth settings, add API Key (public for base auth type)
+  >> add additional auth type- cognito pool
+  >> this step enables GraphQL to use auth
+  >> update graphql schema with @key directive- makes a new query method
+  >> redeploy with amplify push
+> make create-post pages
+  >> export with withAuthenticator
+  >> createNewPost function makes API.graphql call
+      >> use authMode for cognito pool, default is API Key(public)
+  >> add router to push to new post
+> make a dynamic path for posts- posts folder with [id].js
+  >> use the isFallback in useRouter to get loading state of new posts
+  >> getStaticPaths using listPosts query
+  >> map response to object with key params
+  >> destructure params from props in getStaticProps
+  >> use single id to getPost query for single post
+> make authenticated req to edit a post
+  >> two methods: withAuthenticator OR make protected route
+  >> Auth.currentAuthenticatedUser will fail for anyone not logged in AND have to pass query variables
+> make a method for updating nav to show my-posts when user is logged in
+  >> in _app.js, import Hub from amplify- used to initialize eventlisteners
+  >> Hub listen for auth event, update local state for signed in status
+  >> only renders my-posts if a user is currently auth'd
+> create edit-post page, update my-posts page for nav to edit-post, add delete post mutation
+> add incremental static update
+  >> need to rehydrate(update stale, staticly generated page) post list when posts are edited
+  >> achieve by adding revalidate option in getStaticProps return
+> add functionality to add image using Amplify Storage
+  >> amplify add Storage
+  >> content, auth&guest (guest read only), no lambda
+  >> need to add img id to schema- update api
